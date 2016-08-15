@@ -1,9 +1,23 @@
 
-$configJsonPath = "$env:USERPROFILE/.badmishka/php-fpm.json"
+
+
+# Keep Private 
+function Get-PhpFpmProfileConfig() {
+    param()
+
+    if((Get-Command Get-BadMishkaProfile -ErrorAction SilentlyContinue) -eq $null) {
+        $configJsonPath = "$env:USERPROFILE/.badmishka"
+    } else {
+        $configJsonPath = Get-BadMishkaProfile 
+    }
+
+    return "$configJsonPath/php-fpm.json"
+}
 
 function Read-PhpFpmUserSettings() {
     param()
 
+   $configJsonPath = Get-PhpFpmProfileConfig
     
     if(-not (Test-Path $configJsonPath)) {
         $json = "{`"path`": null}"
@@ -26,6 +40,7 @@ function Write-PhpFpmUserSettings() {
         [object] $Settings
     )
 
+    $configJsonPath = Get-PhpFpmProfileConfig
     $json =  $Settings | ConvertTo-Json -Depth 5 
     [System.IO.File]::WriteAllText($configJsonPath, $json)
 

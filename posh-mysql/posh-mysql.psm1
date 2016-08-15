@@ -1,9 +1,24 @@
 
-$configJsonPath = "$env:USERPROFILE/.badmishka/mysql.json"
+
+
+# Keep Private 
+function Get-MysqlProfileConfig() {
+    param()
+
+    if((Get-Command Get-BadMishkaProfile -ErrorAction SilentlyContinue) -eq $null) {
+        $configJsonPath = "$env:USERPROFILE/.badmishka"
+    } else {
+        $configJsonPath = Get-BadMishkaProfile 
+    }
+
+    return "$configJsonPath/mysql.json"
+}
+
 
 function Read-MySqlUserSettings() {
     param()
 
+ $configJsonPath = Get-MysqlProfileConfig
     
     if(-not (Test-Path $configJsonPath)) {
         $json = "{`"path`": null}"
@@ -26,6 +41,7 @@ function Write-MySqlUserSettings() {
         [object] $Settings
     )
 
+     $configJsonPath = Get-MySqlProfileConfig
     $json =  $Settings | ConvertTo-Json -Depth 5 
     [System.IO.File]::WriteAllText($configJsonPath, $json)
 

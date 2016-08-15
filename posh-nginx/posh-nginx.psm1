@@ -1,9 +1,21 @@
 
-$configJsonPath = "$env:USERPROFILE/.badmishka/nginx.json"
+# Keep Private 
+function Get-NginxProfileConfig() {
+    param()
+
+    if((Get-Command Get-BadMishkaProfile -ErrorAction SilentlyContinue) -eq $null) {
+        $configJsonPath = "$env:USERPROFILE/.badmishka"
+    } else {
+        $configJsonPath = Get-BadMishkaProfile 
+    }
+
+    return "$configJsonPath/nginx.json"
+}
 
 function Read-NginxUserSettings() {
     param()
-
+    
+    $configJsonPath = Get-NginxProfileConfig
     
     if(-not (Test-Path $configJsonPath)) {
         $json = "{`"path`": null}"
@@ -25,6 +37,8 @@ function Write-NginxUserSettings() {
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [object] $Settings
     )
+
+    $configJsonPath = Get-NginxProfileConfig
 
     $json =  $Settings | ConvertTo-Json -Depth 5 
     [System.IO.File]::WriteAllText($configJsonPath, $json)
