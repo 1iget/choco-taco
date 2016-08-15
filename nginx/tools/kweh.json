@@ -1,0 +1,12 @@
+{
+    "version": "1.11.3",
+    "id": "nginx",
+    "install": {
+        "type": "zip",
+        "url": "http://nginx.org/download/nginx-1.11.3.zip",
+        "checksum": {
+            "type": "",
+            "hash": ""
+        }
+    }
+}

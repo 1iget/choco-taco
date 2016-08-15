@@ -1,0 +1,12 @@
+{
+    "version": "7.0.9",
+    "id": "php-fpm",
+    "install": {
+        "type": "zip",
+        "url": "http://windows.php.net/downloads/releases/php-7.0.9-nts-Win32-VC14-x86.zip",
+        "checksum": {
+            "type": "SHA1",
+            "hash": "6b439fe2520a08f579648c8ac147fcba289f4113"
+        }
+    }
+}

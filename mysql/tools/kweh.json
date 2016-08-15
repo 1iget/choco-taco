@@ -1,0 +1,12 @@
+{
+    "version": "5.7.14",
+    "id": "mysql",
+    "install": {
+        "type": "zip",
+        "url": " https://dev.mysql.com/downloads/file/?id=464459",
+        "checksum": {
+            "type": "MD5",
+            "hash": "5b88f3e3724122f1fbd2fac26f8a7bd8"
+        }
+    }
+}
