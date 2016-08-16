@@ -61,3 +61,8 @@ Remove-Item $extractDir -Force -Recurse
 if(-not (Test-Path $symlinkDir)) {
     cmd /c mklink /D  "`"$symlinkDir`"" "`"$targetDir`"" | Write-Debug
 }
+
+# TODO: create sites-enabled folder & inject include that references that folder 
+# http {
+#    include       mime.types;
+#    include "c:/apps/nginx/[version]/conf/sites-enabled/*.conf";

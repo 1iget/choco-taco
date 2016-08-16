@@ -160,7 +160,7 @@ server {
     }
 
 
-    # TODO: make atomic
+    # TODO: make atomic or at least export the config to a temp directory if it can't written.
     # TODO: consider using PHP instead that returns a response that fails the script if the database or user exists.
     # TODO: consider skipping if pw is set and a skip parameter is set.
     & $mysql --user=$MySqlUser --password=$MySqlPassword  --execute="CREATE DATABASE IF NOT EXISTS $Database;";
