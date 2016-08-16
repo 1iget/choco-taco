@@ -160,7 +160,9 @@ server {
     }
 
 
-    #TODO make atomic, consider using ADO + MySQL
+    # TODO: make atomic
+    # TODO: consider using PHP instead that returns a response that fails the script if the database or user exists.
+    # TODO: consider skipping if pw is set and a skip parameter is set.
     & $mysql --user=$MySqlUser --password=$MySqlPassword  --execute="CREATE DATABASE IF NOT EXISTS $Database;";
     & $mysql --user=$MySqlUser --password=$MySqlPassword  --execute="CREATE USER IF NOT EXISTS $DatabaseUser@localhost IDENTIFIED BY `'$DatabaseUserPassword`';";
     & $mysql --user=$MySqlUser --password=$MySqlPassword  --execute="GRANT ALL PRIVILEGES ON ${Database}.* TO $DatabaseUser@localhost;";
